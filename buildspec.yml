@@ -10,6 +10,9 @@ phases:
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
+      - echo "Starting gradle build..."
+      - chmod +x gradlew
+      - ./gradlew build
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
