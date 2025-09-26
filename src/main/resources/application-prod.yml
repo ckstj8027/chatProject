@@ -10,7 +10,7 @@ spring:
         nodes:
           - ${REDIS_CLUSTER_NODES}
       ssl:
-        enabled: false  # 전송 암호화 때문에 필수!
+        enabled: true # 전송 암호화 때문에 필수!
       timeout: 2000ms
       lettuce:
         pool:
