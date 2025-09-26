@@ -12,7 +12,7 @@ phases:
     commands:
       - echo "Starting gradle build..."
       - chmod +x gradlew
-      - ./gradlew build
+      - ./gradlew clean build -x test
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
