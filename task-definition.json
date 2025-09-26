@@ -1,22 +1,26 @@
 {
   "family": "chat-task",
-  "taskRoleArn": "arn:aws:iam::265385634200:role/ecsTaskExecutionRole",
-  "executionRoleArn": "arn:aws:iam::265385634200:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "1024",
   "memory": "3072",
+  "executionRoleArn": "arn:aws:iam::265385634200:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::265385634200:role/ecsTaskExecutionRole",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
   "containerDefinitions": [
     {
       "name": "chat-backend-container",
-      "image": "<IMAGE1_NAME>",  // 이 부분만 변경!
+      "image": "<IMAGE1_NAME>",
+      "essential": true,
       "portMappings": [
         {
           "containerPort": 8080,
           "protocol": "tcp"
         }
       ],
-      "essential": true,
       "environment": [
         {
           "name": "SPRING_PROFILES_ACTIVE",
@@ -25,16 +29,16 @@
       ],
       "secrets": [
         {
+          "name": "DB_HOST",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.host::"
+        },
+        {
           "name": "DB_USERNAME",
           "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.username::"
         },
         {
           "name": "DB_PASSWORD",
           "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.password::"
-        },
-        {
-          "name": "DB_HOST",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.host::"
         },
         {
           "name": "JWT_SECRET",
