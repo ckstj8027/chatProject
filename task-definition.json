@@ -9,7 +9,7 @@
   "containerDefinitions": [
     {
       "name": "chat-backend-container",
-      "image": "265385634200.dkr.ecr.ap-northeast-2.amazonaws.com/chat-backend:latest",
+      "image": "<IMAGE1_NAME>",  // 이 부분만 변경!
       "portMappings": [
         {
           "containerPort": 8080,
