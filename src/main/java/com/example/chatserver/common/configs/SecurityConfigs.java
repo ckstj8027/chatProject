@@ -34,7 +34,10 @@ public class SecurityConfigs {
                 // 프론트는 로컬호스트 3000 인데 백엔드는 8080 이니까 연결시킬라고 설정
                 .csrf(AbstractHttpConfigurer::disable)  // 굳이 여기서 안해도 다른 방법이많아서 권장 x
                 .httpBasic(AbstractHttpConfigurer::disable)// http basic 비활성화
-                .authorizeHttpRequests(a->a.requestMatchers("/","/member/create","/member/doLogin","/connect/**").permitAll().anyRequest().authenticated())
+
+                .authorizeHttpRequests(a->a
+                                .requestMatchers("/health").permitAll()
+                        .requestMatchers("/member/create","/member/doLogin","/connect/**").permitAll().anyRequest().authenticated())
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))// 세션방식 비활성화
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 
