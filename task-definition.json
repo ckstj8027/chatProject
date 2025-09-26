@@ -1,14 +1,14 @@
 {
-  "family": "chatserver-task",
-  "taskRoleArn": "arn:aws:iam::265385634200:role/ecsTaskRole",
+  "family": "chat-task",
+  "taskRoleArn": "arn:aws:iam::265385634200:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::265385634200:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
-  "cpu": "512",
-  "memory": "1024",
+  "cpu": "1024",
+  "memory": "3072",
   "containerDefinitions": [
     {
-      "name": "chatserver",
+      "name": "chat-backend-container",
       "image": "265385634200.dkr.ecr.ap-northeast-2.amazonaws.com/chat-backend:latest",
       "portMappings": [
         {
@@ -52,9 +52,9 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/chatserver",
+          "awslogs-group": "/ecs/chat-task",
           "awslogs-region": "ap-northeast-2",
-          "awslogs-stream-prefix": "chatserver"
+          "awslogs-stream-prefix": "ecs"
         }
       }
     }
