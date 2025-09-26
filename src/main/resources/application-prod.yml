@@ -17,7 +17,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DB_HOST}/chatdb?userSSL=false
+    url: jdbc:mysql://${DB_HOST}/chatdb?useSSL=false
     username: ${DB_USERNAME:admin}
     password: ${DB_PASSWORD}
 
