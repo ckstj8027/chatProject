@@ -1,0 +1,62 @@
+{
+  "family": "chatserver-task",
+  "taskRoleArn": "arn:aws:iam::265385634200:role/ecsTaskRole",
+  "executionRoleArn": "arn:aws:iam::265385634200:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "containerDefinitions": [
+    {
+      "name": "chatserver",
+      "image": "265385634200.dkr.ecr.ap-northeast-2.amazonaws.com/chat-backend:latest",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "SPRING_PROFILES_ACTIVE",
+          "value": "prod"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DB_USERNAME",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:database.username::"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:database.password::"
+        },
+        {
+          "name": "DB_HOST",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:database.host::"
+        },
+        {
+          "name": "JWT_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:jwt.secret::"
+        },
+        {
+          "name": "FRONTEND_URL",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:frontend.url::"
+        },
+        {
+          "name": "REDIS_CLUSTER_NODES",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:redis.cluster.nodes::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/chatserver",
+          "awslogs-region": "ap-northeast-2",
+          "awslogs-stream-prefix": "chatserver"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # 1. MySQL 컨테이너
+  mysql-container:
+    image: mysql
+    container_name: mysql-container
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=chatdb
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p1234"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - chat-network
+
+  # 2. Redis 컨테이너
+  redis-container:
+    image: redis
+    container_name: redis-container
+    restart: always
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - chat-network
+
+  # 3. Spring Boot 애플리케이션 컨테이너 (백엔드)
+  bobchat-app:
+    image: ckstj8027/bobchat
+    container_name: bobchat-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql-container:
+        condition: service_healthy
+      redis-container:
+        condition: service_healthy
+    networks:
+      - chat-network
+
+  # 4. Vue.js 애플리케이션 컨테이너 (프런트엔드)
+  bobchat-front:
+    # Docker Hub에서 이미지를 직접 다운로드하도록 변경합니다.
+    image: ckstj8027/front
+    container_name: bobchat-front
+    ports:
+      - "3000:80"
+    depends_on:
+      - bobchat-app
+    networks:
+      - chat-network
+
+networks:
+  chat-network:
+    driver: bridge

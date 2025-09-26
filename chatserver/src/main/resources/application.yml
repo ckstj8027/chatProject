@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  data:
+    redis:
+ #     host: redis-container  # localhost -> redis-container로 변경
+      host: localhost  # localhost -> redis-container로 변경
+      port: 6379
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #  url: jdbc:mysql://mysql-container:3306/chatdb?userSSL=false # localhost -> mysql-container로 변경
+    url: jdbc:mysql://localhost:3306/chatdb?userSSL=false # localhost -> mysql-container로 변경
+    username: root
+    password: 1234
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show_sql: true
+
+
+jwt:
+  secretKey: y3y1y123a1231d970gh5l5678jGH6JG77JH123dklS1123DA768FF123af3123fg
+  expiration: 3000
+
+websocket:
+  allowed-origins: http://localhost:3000
