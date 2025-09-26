@@ -13,7 +13,7 @@
   "containerDefinitions": [
     {
       "name": "chat-backend-container",
-      "image": "<IMAGE1_NAME>",
+      "image": "265385634200.dkr.ecr.ap-northeast-2.amazonaws.com/chat-backend:latest",
       "essential": true,
       "portMappings": [
         {
@@ -49,8 +49,8 @@
           "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:FRONTEND_URL::"
         },
         {
-          "name": "REDIS_CLUSTER_NODES",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:REDIS_CLUSTER_NODES::"
+          "name": "REDIS_HOST",
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:REDIS_HOST::"
         }
       ],
       "logConfiguration": {
