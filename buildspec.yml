@@ -23,6 +23,8 @@ phases:
       - docker push 265385634200.dkr.ecr.ap-northeast-2.amazonaws.com/chat-backend:latest
       - echo Writing image definitions file...
       - printf '[{"name":"chat-backend-container","imageUri":"265385634200.dkr.ecr.ap-northeast-2.amazonaws.com/chat-backend:latest"}]' > imagedefinitions.json
+      - echo Updating task definition with image URI...
+      - sed -i 's|<IMAGE1_NAME>|265385634200.dkr.ecr.ap-northeast-2.amazonaws.com/chat-backend:latest|g' task-definition.json
 
 artifacts:
   files:

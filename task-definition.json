@@ -30,27 +30,27 @@
       "secrets": [
         {
           "name": "DB_HOST",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.host::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:DB_HOST::"
         },
         {
           "name": "DB_USERNAME",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.username::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:DB_USERNAME::"
         },
         {
           "name": "DB_PASSWORD",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.password::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:DB_PASSWORD::"
         },
         {
           "name": "JWT_SECRET",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:jwt.secret::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:JWT_SECRET::"
         },
         {
           "name": "FRONTEND_URL",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:frontend.url::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:FRONTEND_URL::"
         },
         {
           "name": "REDIS_CLUSTER_NODES",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:redis.cluster.nodes::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:REDIS_CLUSTER_NODES::"
         }
       ],
       "logConfiguration": {
