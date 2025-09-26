@@ -3,6 +3,7 @@ package com.example.chatserver.common.configs;
 import com.example.chatserver.common.auth.JwtAuthFilter;
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +20,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfigs {
+
+    @Value("${websocket.allowed-origins}")
+    private String allowedOrigins;
 
     private final JwtAuthFilter jwtAuthFilter;
     @Bean
@@ -42,7 +46,7 @@ public class SecurityConfigs {
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://frontend-three-gray-94.vercel.app"));
+        configuration.setAllowedOrigins(Arrays.asList(allowedOrigins));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);

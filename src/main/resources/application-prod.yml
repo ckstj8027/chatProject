@@ -1,16 +1,12 @@
 server:
   port: 8080
 spring:
-  redis:
-    host: ${REDIS_CLUSTER_NODES}
-    port: 6379
   data:
     redis:
-      cluster:
-        nodes:
-          - ${REDIS_CLUSTER_NODES}
+      host: ${REDIS_HOST}  # 단일 모드 엔드포인트
+      port: 6379
       ssl:
-        enabled: true # 전송 암호화 때문에 필수!
+        enabled: true  # 전송 암호화 활성화됨
       timeout: 2000ms
       lettuce:
         pool:
