@@ -26,33 +26,34 @@
       "secrets": [
         {
           "name": "DB_USERNAME",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:database.username::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.username::"
         },
         {
           "name": "DB_PASSWORD",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:database.password::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.password::"
         },
         {
           "name": "DB_HOST",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:database.host::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:database.host::"
         },
         {
           "name": "JWT_SECRET",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:jwt.secret::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:jwt.secret::"
         },
         {
           "name": "FRONTEND_URL",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:frontend.url::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:frontend.url::"
         },
         {
           "name": "REDIS_CLUSTER_NODES",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret:redis.cluster.nodes::"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:265385634200:secret:chat/secret-MaDiIS:redis.cluster.nodes::"
         }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
           "awslogs-group": "/ecs/chat-task",
+          "awslogs-create-group": "true",
           "awslogs-region": "ap-northeast-2",
           "awslogs-stream-prefix": "ecs"
         }
