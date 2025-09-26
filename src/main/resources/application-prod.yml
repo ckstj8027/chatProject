@@ -1,6 +1,8 @@
 server:
   port: 8080
 spring:
+  redis:
+    host: ${REDIS_CLUSTER_NODES}
   data:
     redis:
       cluster:
