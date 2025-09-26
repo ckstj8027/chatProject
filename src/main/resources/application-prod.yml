@@ -3,6 +3,7 @@ server:
 spring:
   redis:
     host: ${REDIS_CLUSTER_NODES}
+    port: 6379
   data:
     redis:
       cluster:
