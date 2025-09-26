@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
+import io.lettuce.core.ClientOptions;
+import io.lettuce.core.SslOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
@@ -29,10 +32,14 @@ public class RedisConfig {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
         configuration.setHostName(host);
         configuration.setPort(port);
-        //redis pub/sub 에서는 특정 데이터 베이스에 의존적이지않음
-        // configuration.setDatabase(0); 레디스에는 여러  db 가 있고 0번은 로그인 db 1번은 캐싱 db 이런식으로 사용할수있다
-        // 여기서는 큰 의미는 없다
-        return new LettuceConnectionFactory(configuration);
+
+        // SSL 설정 추가 (AWS ElastiCache 전송 암호화)
+        LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
+            .useSsl()
+            .disablePeerVerification() // ElastiCache SSL 인증서 검증 비활성화
+            .build();
+
+        return new LettuceConnectionFactory(configuration, clientConfig);
 
 
     }
