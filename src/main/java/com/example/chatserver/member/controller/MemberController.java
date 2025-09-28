@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/member")
@@ -27,7 +28,7 @@ public class MemberController {
     private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/create")
-    public HttpEntity<?> createMember(@RequestBody MemberSaveReqDto memberSaveReqDto){
+    public HttpEntity<?> createMember(@Valid @RequestBody MemberSaveReqDto memberSaveReqDto){
         Member member=memberService.create(memberSaveReqDto);
 
         return new ResponseEntity<>(member.getId(), HttpStatus.CREATED);
