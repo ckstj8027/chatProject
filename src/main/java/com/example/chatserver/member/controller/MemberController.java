@@ -34,7 +34,7 @@ public class MemberController {
     }
 
     @PostMapping("/doLogin")
-    private HttpEntity<?> doLogin(@RequestBody MemberLoginReqDto memberLoginReqDto){
+    public HttpEntity<?> doLogin(@RequestBody MemberLoginReqDto memberLoginReqDto){
 
         // 이메일 ,비번 검증하고
        Member member= memberService.login(memberLoginReqDto);
