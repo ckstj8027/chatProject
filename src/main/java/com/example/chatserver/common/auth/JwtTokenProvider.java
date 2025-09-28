@@ -19,7 +19,7 @@ public class JwtTokenProvider {
     public JwtTokenProvider(@Value("${jwt.secretKey}")String secretKey,@Value("${jwt.expiration}") int expiration) {
         this.secretKey = secretKey;
         this.expiration = expiration;
-        this.SECRET_KEY = new SecretKeySpec(java.util.Base64.getDecoder().decode(secretKey), SignatureAlgorithm.HS512.getJcaName());
+        this.SECRET_KEY = new SecretKeySpec(secretKey.getBytes(), SignatureAlgorithm.HS256.getJcaName());
     }
 
     public String createToken(String email,String role){
