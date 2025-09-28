@@ -37,7 +37,7 @@ public class SecurityConfigs {
 
                 .authorizeHttpRequests(a->a
 
-                        .requestMatchers("/health","/member/doLogin","/member/create","/connect/**").permitAll().anyRequest().authenticated())
+                        .requestMatchers("/health","/member/doLogin","/member/create","/connect/**","/error").permitAll().anyRequest().authenticated())
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))// 세션방식 비활성화
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 
