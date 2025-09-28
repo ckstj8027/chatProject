@@ -37,3 +37,9 @@ jwt:
 
 websocket:
   allowed-origins: ${FRONTEND_URL}
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+    com.example.chatserver: DEBUG
