@@ -36,6 +36,16 @@ public class JwtAuthFilter extends GenericFilter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse= (HttpServletResponse) response;
 
+        // 인증이 필요 없는 경로는 바로 통과
+        String path = httpServletRequest.getRequestURI();
+        if (path.equals("/health") ||
+            path.equals("/member/create") ||
+            path.equals("/member/doLogin") ||
+            path.startsWith("/connect/")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         String token =httpServletRequest.getHeader("Authorization");
 
         try {
@@ -76,6 +86,7 @@ public class JwtAuthFilter extends GenericFilter {
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
             httpServletResponse.setContentType("application/json");
             httpServletResponse.getWriter().write("invalid token");
+            return;
         }
         chain.doFilter(request,response);
 
