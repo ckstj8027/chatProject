@@ -36,8 +36,8 @@ public class SecurityConfigs {
                 .httpBasic(AbstractHttpConfigurer::disable)// http basic 비활성화
 
                 .authorizeHttpRequests(a->a
-                                .requestMatchers("/health").permitAll()
-                        .requestMatchers("/member/create","/member/doLogin","/connect/**").permitAll().anyRequest().authenticated())
+
+                        .requestMatchers("/health","/member/doLogin","/member/create","/connect/**").permitAll().anyRequest().authenticated())
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))// 세션방식 비활성화
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 
