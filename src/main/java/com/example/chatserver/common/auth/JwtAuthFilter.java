@@ -38,6 +38,14 @@ public class JwtAuthFilter extends GenericFilter {
 
         // 인증이 필요 없는 경로는 바로 통과
         String path = httpServletRequest.getRequestURI();
+        String method = httpServletRequest.getMethod();
+
+        // OPTIONS 요청은 모두 통과 (CORS preflight)
+        if ("OPTIONS".equalsIgnoreCase(method)) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         if (path.equals("/health") ||
             path.equals("/member/create") ||
             path.equals("/member/doLogin") ||
