@@ -6,7 +6,7 @@ spring:
       host: ${REDIS_HOST}  # 단일 모드 엔드포인트
       port: 6379
       ssl:
-        enabled: true  # 전송 암호화 활성화됨
+        enabled: false  # 전송 암호화 활성화됨
       timeout: 2000ms
       lettuce:
         pool:
