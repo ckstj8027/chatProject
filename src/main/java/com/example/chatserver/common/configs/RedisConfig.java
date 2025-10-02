@@ -25,6 +25,9 @@ public class RedisConfig {
     @Value("${spring.data.redis.port}")
     private int port;
 
+    @Value("${spring.data.redis.ssl.enabled}")
+    private boolean sslEnabled;
+
     // 연결 기본 객체
     @Bean
     @Qualifier("chatPubSub")
@@ -33,15 +36,18 @@ public class RedisConfig {
         configuration.setHostName(host);
         configuration.setPort(port);
 
-        // SSL 설정 추가 (AWS ElastiCache 전송 암호화)
-//        LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
-//            .useSsl()
-//            .disablePeerVerification() // ElastiCache SSL 인증서 검증 비활성화
-//            .build();
+        // SSL 설정 (YML 설정에 따라 조건부 적용)
+        LettuceClientConfiguration clientConfig;
+        if (sslEnabled) {
+            clientConfig = LettuceClientConfiguration.builder()
+                .useSsl()
+                .disablePeerVerification() // ElastiCache SSL 인증서 검증 비활성화
+                .build();
+        } else {
+            clientConfig = LettuceClientConfiguration.builder().build();
+        }
 
         return new LettuceConnectionFactory(configuration, clientConfig);
-
-
     }
 
     //publish 객체
